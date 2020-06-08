@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+  
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+
+    <title>Calorie Counter</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/simplex/bootstrap.min.css>
+    
+  </head>
+  <body>
+
+  <link rel="stylesheet" href="/stylesheets/topnav.css" />
+  <link rel="stylesheet" href="/stylesheets/topnav.js" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="topnav" id="myTopnav">
+    <a href="/" class="active">Home</a>
+    <a href="/entries">Entries</a>
+    <a href="/entries/new">Add Entry</a>
+    <a href="/entries/calories">Calorie Count</a>
+    <a href="/logout">Logout</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+    <div class="wrapper">
+
+        <%= yield %>
+
+      <footer class="branding">
+        <small>&copy; 2020 <strong>Caloriecounter</strong></small>
+      </footer>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+  </body>
+</html>

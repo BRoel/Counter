@@ -1,0 +1,31 @@
+<h1>Calorie Counter</h1>
+<br>
+
+<h4><ul>
+  <% if @entries.size > 0 %>
+    <table class="table table-hover table-striped" >
+    <tr class="info">
+      <th><h4>Date</h4></th>
+      <th><h4>Meal</h4></th>
+      <th><h4>Food Type</h4></th>
+      <th><h4>Calories</h4></th>
+      <th><h4>Edit</h4></th>
+    </tr>
+      <% current_user.entries_sort_by_date.each do |entry| %>
+        <tr style="text-align:left;">
+          <td><%= entry.date.strftime('%D') %></td>
+          <td><%= entry.meal %></td>
+          <td><a href="entries/<%= entry.id %>"><%= entry.food_type %></a></td>
+          <td><%= entry.calories %></td>
+          <td><a href="entries/<%= entry.id %>/edit">Edit</a></td>
+        </tr>
+      <% end %>
+    </table>
+    <br>
+    <a href="/entries/new">Create new entry</a>
+    <br>
+    <br>
+  <% else %>
+    Click <a href="/entries/new">here to add an entry.</a>
+  <% end %> 
+</ul></h4>

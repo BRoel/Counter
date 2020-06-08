@@ -1,0 +1,23 @@
+<h1>Edit Entry</h1>
+<br>
+<% if flash.has?(:message) %>
+  <p style="color:#f73325;"><%= flash[:message] %> </p>
+<% end %>
+
+<h5><form action="/entries/<%= @entry.id %>" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="patch"/>
+  
+  <label for="meal">Meal: </label>
+  <input type="text" name="entry[meal]" id="meal" value="<%= @entry.meal %>"/>
+  <br>
+  <label for="food_type">Food Type: </label>
+  <input type="text" name="entry[food_type]" id="food_type" value="<%= @entry.food_type %>"/>
+  <br>
+  <label for="calories">Calories: </label>
+  <input type="number" name="entry[calories]" id="calories" min="0.01" step="0.01" max="9999999.99" value="<%= @entry.calories %>"/>
+  <br>
+  <label for="date">Date: </label>
+  <input type="date" name="entry[date]" id="date" min="2020-01-01" max="2030-12-31" value="<%= @entry.date %>"/>
+  <br><br>
+  <input type="submit" value="Update Entry"/>
+</form></h5>

@@ -1,0 +1,21 @@
+<h1>Entry Details</h1>
+
+<br>
+
+<h2><%= @entry.meal %></h2>
+
+<br>
+
+<p><b>Date:</b> <%= @entry.date.strftime('%D') %></p>
+<p><b>Calories:</b> <%= "%.2f" % @entry.calories %></p>
+<p><b>Food Type:</b> <%= @entry.food_type %></p>
+
+<h5><form action="/entries/<%= @entry.id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Entry">
+</form></h5>
+<br>
+
+<p><a href="/entries/<%= @entry.id %>/edit">Edit Entry</a></p>
+
+<p><a href="/entries">View All Entries</a></p>
