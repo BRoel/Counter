@@ -8,7 +8,14 @@
   <input type="hidden" id="hidden" name="_method" value="patch"/>
   
   <label for="meal">Meal: </label>
-  <input type="text" name="entry[meal]" id="meal" value="<%= @entry.meal %>"/>
+  
+  <select id="meal" name="entry[meal]" value="<%= @entry.meal %>">
+  <option value="Breakfast">Breakfast</option>
+  <option value="Lunch">Lunch</option>
+  <option value="Dinner">Dinner</option>
+  <option value="Snack">Snack</option>
+  <option value="Drink">Drink</option>
+  </select>
   <br>
   <label for="food_type">Food Type: </label>
   <input type="text" name="entry[food_type]" id="food_type" value="<%= @entry.food_type %>"/>

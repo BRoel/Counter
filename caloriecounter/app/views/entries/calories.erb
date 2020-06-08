@@ -1,12 +1,12 @@
 <h1>Caloric Summary</h1>
 <br>
-<h3><form action="/entries/calories" method="GET">
+<h5><form action="/entries/calories" method="GET">
     <label for="after_date">Date: </label>
     <br>
     <input type="date" name="after_date" id="after_date" value="<%= @after_date %>"/>
     <br>
     <input type="submit" value="Filter">
     <br>
-</form></h3>
+</form></h5>
 <br>
-<h2>You have consumed <%= @calories%> calories.</h2>
+<h5>You have consumed <%= @calories%> calories.</h5>

@@ -5,10 +5,10 @@
 <h2><%= @entry.meal %></h2>
 
 <br>
-
-<p><b>Date:</b> <%= @entry.date.strftime('%D') %></p>
-<p><b>Calories:</b> <%= "%.2f" % @entry.calories %></p>
+<p><b>Meal:</b> <%= @entry.meal %></p>
 <p><b>Food Type:</b> <%= @entry.food_type %></p>
+<p><b>Calories:</b> <%= @entry.calories %></p>
+<p><b>Date:</b> <%= @entry.date.strftime('%D') %></p>
 
 <h5><form action="/entries/<%= @entry.id %>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="DELETE">

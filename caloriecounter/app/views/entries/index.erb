@@ -1,15 +1,14 @@
 <h1>Calorie Counter</h1>
 <br>
-
-<h4><ul>
+<h5><ul>
   <% if @entries.size > 0 %>
     <table class="table table-hover table-striped" >
     <tr class="info">
-      <th><h4>Date</h4></th>
-      <th><h4>Meal</h4></th>
-      <th><h4>Food Type</h4></th>
-      <th><h4>Calories</h4></th>
-      <th><h4>Edit</h4></th>
+      <th><h5>Date</h5></th>
+      <th><h5>Meal</h5></th>
+      <th><h5>Food Type</h5></th>
+      <th><h5>Calories</h5></th>
+      <th><h5>Edit</h5></th>
     </tr>
       <% current_user.entries_sort_by_date.each do |entry| %>
         <tr style="text-align:left;">
@@ -28,4 +27,4 @@
   <% else %>
     Click <a href="/entries/new">here to add an entry.</a>
   <% end %> 
-</ul></h4>
+</ul></h5>

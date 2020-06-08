@@ -8,7 +8,13 @@
 <h5><form action="/entries" method="POST">
   <input type = "hidden" name="entry[user_id]" value=<%= current_user.id %>/>
   
-  <input type="text" name="entry[meal]" id="meal" placeholder="Meal">
+<select id="meal" name="entry[meal]">
+  <option value="Breakfast">Breakfast</option>
+  <option value="Lunch">Lunch</option>
+  <option value="Dinner">Dinner</option>
+  <option value="Snack">Snack</option>
+  <option value="Drink">Drink</option>
+</select>
   <br>
   <input type="text" name="entry[food_type]" id="food_type" placeholder="Food Type">
   <br>
