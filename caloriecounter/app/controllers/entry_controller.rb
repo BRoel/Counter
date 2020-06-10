@@ -3,23 +3,23 @@ class EntryController < ApplicationController
     set(:auth) do |auth_required|
       condition do
         if auth_required && !logged_in? 
-          redirect "/login", 302
+          redirect "/login"
         end
       end
     end
-      
+      #can view all owned entries if logged in, otherwise redirect to login
     get '/entries', auth: true do 
       @entries = current_user.entries
-      @calories = current_user.calorie_amount
+      @calories = current_user.calorie_amount 
       erb :'entries/index'
     end
       
     get '/entries/new', auth: true do
-      erb :'entries/new'
+      erb :'entries/new' #user can create new entry
     end
         
     get '/entries/calories' do
-      if params[:after_date].present?
+      if params[:after_date].present? #calorie total method by date
         @after_date = params[:after_date]
         @calories = current_user.entries.where("date >= ?", params[:after_date]).sum(:calories)
       else
@@ -28,29 +28,29 @@ class EntryController < ApplicationController
       erb :"/entries/calories"
     end
 
-    post '/entries' do
-      if !params[:entry].select{|b, c| c == ""}.empty?
+    post '/entries' do  #flash message method if form is not filled in
+      if !params[:entry].select{|key, value| value == ""}.empty?
         flash[:message] = "Please fill in the form completely"
         redirect to "/entries/new"
       else
-        @user = current_user
+        @user = current_user #otherwise create new entry
         @entry = Entry.create(params[:entry])
         redirect to "/entries/#{@entry.id}"
       end
     end
       
-    get '/entries/:id', auth: true do
+    get '/entries/:id', auth: true do #show method to show single entry 
       @entry = Entry.find(params[:id])
       erb :'entries/show'
     end
       
-    get '/entries/:id/edit', auth: true do
+    get '/entries/:id/edit', auth: true do  # if entry is owned by current user, they can edit the previously submitted entry.
       @entry = Entry.find(params[:id])
       permit_user(@entry)
     end
       
     patch '/entries/:id' do
-      if params[:entry].select{|b, c| c == ""}.empty?
+      if params[:entry].select{|key, value| value == ""}.empty? # if the value is empty use flash to show message of incomplete form submission, otherwise save edit.
         @entry = Entry.find(params[:id])
         @entry.update(params[:entry])
         @entry.save
@@ -61,7 +61,7 @@ class EntryController < ApplicationController
       end
     end
 
-    delete '/entries/:id/delete', auth: true do
+    delete '/entries/:id/delete', auth: true do  # allows logged in user to delete their entry
       @entry = Entry.find(params[:id])
       @entry.user == current_user
       @entry.destroy
