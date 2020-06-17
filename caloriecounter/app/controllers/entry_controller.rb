@@ -40,10 +40,10 @@ class EntryController < ApplicationController
     end
       
     get '/entries/:id', auth: true do #show method to show single entry 
-      if @entry = Entry.find(params[:id])
+      @entry = Entry.find(params[:id])
+      if permit_user(@entry)
       erb :'entries/show'
       else 
-        flash[:message] = "This is not your entry"
         redirect to "/entries"
       end
       
@@ -56,7 +56,7 @@ class EntryController < ApplicationController
       else 
         redirect '/entries'
       end
-      
+
     end
       
     patch '/entries/:id' do
