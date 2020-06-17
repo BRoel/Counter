@@ -32,11 +32,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def permit_user(entry)
-      if entry.user == current_user
-        erb :'entries/edit'
-      else
-        redirect to '/entries'
-      end
+      entry.user == current_user
     end
 
   end

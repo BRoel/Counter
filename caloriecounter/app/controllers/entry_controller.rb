@@ -40,13 +40,23 @@ class EntryController < ApplicationController
     end
       
     get '/entries/:id', auth: true do #show method to show single entry 
-      @entry = Entry.find(params[:id])
+      if @entry = Entry.find(params[:id])
       erb :'entries/show'
+      else 
+        flash[:message] = "This is not your entry"
+        redirect to "/entries"
+      end
+      
     end
       
     get '/entries/:id/edit', auth: true do  # if entry is owned by current user, they can edit the previously submitted entry.
       @entry = Entry.find(params[:id])
-      permit_user(@entry)
+      if permit_user(@entry)
+        erb :'entries/edit'
+      else 
+        redirect '/entries'
+      end
+      
     end
       
     patch '/entries/:id' do
@@ -62,9 +72,13 @@ class EntryController < ApplicationController
     end
 
     delete '/entries/:id/delete', auth: true do  # allows logged in user to delete their entry
-      @entry = Entry.find(params[:id])
-      @entry.user == current_user
-      @entry.destroy
-      redirect to '/entries'
+      if @entry = Entry.find(params[:id])
+        @entry.user == current_user
+        @entry.destroy
+        redirect to '/entries'
+      else 
+        redirect to '/entries'
+      end
+
     end
   end

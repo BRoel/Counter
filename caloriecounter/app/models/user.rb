@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     has_secure_password
     has_many :entries
-    validates :email, uniqueness: true
+    validates_presence_of :username, :password
   
   def calorie_amount
     entries.collect {|entry| entry.calories}.sum
