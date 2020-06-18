@@ -29,13 +29,13 @@ class EntryController < ApplicationController
     end
 
     post '/entries' do  #flash message method if form is not filled in
-      if !params[:entry].select{|key, value| value == ""}.empty?
-        flash[:message] = "Please fill in the form completely"
-        redirect to "/entries/new"
-      else
+      if params[:entry].select{|key, value| value == ""}.empty?
         @user = current_user #otherwise create new entry
         @entry = @user.entries.create(params[:entry])
         redirect to "/entries/#{@entry.id}"
+      else
+        flash[:message] = "Please fill in the form completely"
+        redirect to "/entries/new"
       end
     end
       
@@ -60,13 +60,13 @@ class EntryController < ApplicationController
     end
       
     patch '/entries/:id' do
-      if params[:entry].select{|key, value| value == ""}.empty? # if the value is empty use flash to show message of incomplete form submission, otherwise save edit.
+      if params[:entry].select{|key, value| value == ""}.empty? 
         @entry = Entry.find(params[:id])
         @entry.update(params[:entry])
         @entry.save
         redirect to "/entries/#{@entry.id}"
       else
-        flash[:message] = "Please fill in the form completely"
+        flash[:message] = "Please fill in the form completely" # if the value is empty use flash to show message of incomplete form submission, otherwise save edit.
         redirect to "/entries/#{params[:id]}/edit"
       end
     end
