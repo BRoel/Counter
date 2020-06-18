@@ -34,7 +34,7 @@ class EntryController < ApplicationController
         redirect to "/entries/new"
       else
         @user = current_user #otherwise create new entry
-        @entry = Entry.create(params[:entry])
+        @entry = @user.entries.create(params[:entry])
         redirect to "/entries/#{@entry.id}"
       end
     end

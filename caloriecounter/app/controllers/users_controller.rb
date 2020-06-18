@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     post '/signup' do
       if !params[:user].select{|key, value| value == ""}.empty?
         flash[:message] = "Please fill in all content" #uses flash if signup form not fullly filled in
+        binding.pry
         redirect to '/signup'
       else
         @user = User.create(params[:user])
