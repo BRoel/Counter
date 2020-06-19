@@ -1,24 +1,24 @@
 class EntryController < ApplicationController
  
-    set(:auth) do |auth_required|
+    set(:authenticate) do |authenticate_required|
       condition do
-        if auth_required && !logged_in? 
-          redirect "/login"
+        if authenticate_required && !logged_in? # if not logged in you will not be able to view posts, redirect to login to authenticate true and see posts when logged in.
+          redirect "/login", 301
         end
       end
     end
       #can view all owned entries if logged in, otherwise redirect to login
-    get '/entries', auth: true do 
+    get '/entries', authenticate: true do 
       @entries = current_user.entries
       @calories = current_user.calorie_amount 
       erb :'entries/index'
     end
       
-    get '/entries/new', auth: true do
+    get '/entries/new', authenticate: true do
       erb :'entries/new' #user can create new entry
     end
         
-    get '/entries/calories' do
+    get '/entries/calories', authenticate: true do
       if params[:after_date].present? #calorie total method by date
         @after_date = params[:after_date]
         @calories = current_user.entries.where("date >= ?", params[:after_date]).sum(:calories)
@@ -28,18 +28,17 @@ class EntryController < ApplicationController
       erb :"/entries/calories"
     end
 
-    post '/entries' do  #flash message method if form is not filled in
+    post '/entries', authenticate: true do  
       if params[:entry].select{|key, value| value == ""}.empty?
-        @user = current_user #otherwise create new entry
-        @entry = @user.entries.create(params[:entry])
+        @entry = current_user.entries.create(params[:entry]) #create new entry
         redirect to "/entries/#{@entry.id}"
       else
-        flash[:message] = "Please fill in the form completely"
+        flash[:message] = "Please fill in the form completely" #flash message method if form is not filled in
         redirect to "/entries/new"
       end
     end
       
-    get '/entries/:id', auth: true do #show method to show single entry 
+    get '/entries/:id', authenticate: true do #show method to show single entry 
       @entry = Entry.find(params[:id])
       if permit_user(@entry)
       erb :'entries/show'
@@ -49,7 +48,7 @@ class EntryController < ApplicationController
       
     end
       
-    get '/entries/:id/edit', auth: true do  # if entry is owned by current user, they can edit the previously submitted entry.
+    get '/entries/:id/edit', authenticate: true do  # if entry is owned by current user, they can edit the previously submitted entry.
       @entry = Entry.find(params[:id])
       if permit_user(@entry)
         erb :'entries/edit'
@@ -59,7 +58,7 @@ class EntryController < ApplicationController
 
     end
       
-    patch '/entries/:id' do
+    patch '/entries/:id', authenticate: true do
       if params[:entry].select{|key, value| value == ""}.empty? 
         @entry = Entry.find(params[:id])
         @entry.update(params[:entry])
@@ -71,7 +70,7 @@ class EntryController < ApplicationController
       end
     end
 
-    delete '/entries/:id/delete', auth: true do  # allows logged in user to delete their entry
+    delete '/entries/:id/delete', authenticate: true do  # allows logged in user to delete their entry
       @entry = Entry.find(params[:id])
       if permit_user(@entry)
         @entry.destroy
@@ -81,4 +80,4 @@ class EntryController < ApplicationController
       end
 
     end
-  end
+end
