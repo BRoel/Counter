@@ -72,8 +72,8 @@ class EntryController < ApplicationController
     end
 
     delete '/entries/:id/delete', auth: true do  # allows logged in user to delete their entry
-      if @entry = Entry.find(params[:id])
-        @entry.user == current_user
+      @entry = Entry.find(params[:id])
+      if permit_user(@entry)
         @entry.destroy
         redirect to '/entries'
       else 
