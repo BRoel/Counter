@@ -35,6 +35,10 @@ class ApplicationController < Sinatra::Base
       entry.user == current_user
     end
 
+    def find_entry
+      @entry = Entry.find(params[:id])
+    end
+
   end
 
 end
