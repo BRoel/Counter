@@ -7,6 +7,7 @@
       <th><h5>Date</h5></th>
       <th><h5>Meal</h5></th>
       <th><h5>Food Type</h5></th>
+      <th><h5>Description</h5></th>
       <th><h5>Calories</h5></th>
       <th><h5>Edit</h5></th>
     </tr>
@@ -15,6 +16,7 @@
           <td><%= entry.date.strftime('%D') %></td>
           <td><%= entry.meal %></td>
           <td><a href="entries/<%= entry.id %>"><%= entry.food_type %></a></td>
+          <td><%= entry.description %></td>
           <td><%= entry.calories %></td>
           <td><a href="entries/<%= entry.id %>/edit">Edit</a></td>
         </tr>

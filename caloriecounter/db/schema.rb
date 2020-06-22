@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200607212024) do
+ActiveRecord::Schema.define(version: 20200622140849) do
 
   create_table "entries", force: :cascade do |t|
     t.string  "meal"
     t.string  "food_type"
     t.date    "date"
-    t.decimal "calories",  precision: 10
+    t.decimal "calories",    precision: 10
     t.integer "user_id"
+    t.string  "description"
   end
 
   create_table "users", force: :cascade do |t|
