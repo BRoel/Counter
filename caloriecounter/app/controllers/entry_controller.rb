@@ -29,7 +29,7 @@ class EntryController < ApplicationController
     end
 
     post '/entries', authenticate: true do  
-      if params[:entry].select{|key, value| value == ""}.empty? #filter through iterations of params, filter out the values(filter method) return true or false
+      if params[:entry].select{|key, value| value == ""}.empty? #navigate to params hash selecting the key value where the value is blank.  if you do not fill in the form, flash
         @entry = current_user.entries.create(params[:entry]) #create new entry
         redirect to "/entries/#{@entry.id}"
       else
@@ -59,7 +59,7 @@ class EntryController < ApplicationController
     end
       
     patch '/entries/:id', authenticate: true do
-      if params[:entry].select{|key, value| value == ""}.empty? #filter through iterations of params, filter out the values(filter method) return true or false
+      if params[:entry].select{|key, value| value == ""}.empty? #navigate to params hash selecting the key value where the value is blank.  if you do not fill in the form, flash
         find_entry
         @entry.update(params[:entry])
         @entry.save

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     end
   
     post '/signup' do
-      if params[:user].select{|key, value| value == ""}.empty?
+      if params[:user].select{|key, value| value == ""}.empty? #navigate to params hash selecting the key value where the value is blank.  if you do not fill in the form, flash
         @user = User.create(params[:user])
         session[:user_id] = @user.id
         redirect to '/entries'
