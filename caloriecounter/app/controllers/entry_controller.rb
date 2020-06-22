@@ -29,7 +29,7 @@ class EntryController < ApplicationController
     end
 
     post '/entries', authenticate: true do  
-      if params[:entry].select{|key, value| value == ""}.empty?
+      if params[:entry].select{|key, value| value == ""}.empty? #filter through iterations of params, filter out the values(filter method) return true or false
         @entry = current_user.entries.create(params[:entry]) #create new entry
         redirect to "/entries/#{@entry.id}"
       else
