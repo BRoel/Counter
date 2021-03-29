@@ -5,6 +5,10 @@ CalorieCounter is a CRUD app for keeping track of your daily caloric intake, alo
 ##### Watch my demo on YouTube
 <a href= 'https://www.youtube.com/watch?v=6Pp7n-okvq0' rel="nofollow"><img src= "https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 
+# Future Implementations
+
+<li>Add Tests</li>
+
 # Installation
 
 Before you continue, ensure you have installed the latest version of Ruby
