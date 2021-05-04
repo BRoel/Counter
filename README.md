@@ -3,7 +3,7 @@
 CalorieCounter is a CRUD app for keeping track of your daily caloric intake, along with type of foods.
 
 ##### Watch my demo on YouTube
-<a href= 'https://www.youtube.com/watch?v=6Pp7n-okvq0' rel="nofollow"><img src= "https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
+<a href= 'https://www.youtube.com/watch?v=6Pp7n-okvq0' rel="nofollow"><img src= "https://raw.githubusercontent.com/BRoel/feed-it_frontend/main/public/yt_logo_rgb_dark.png" /></a>
 
 # Future Implementations
 
